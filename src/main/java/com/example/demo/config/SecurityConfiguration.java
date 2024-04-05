@@ -49,12 +49,11 @@ public class SecurityConfiguration {
 
 
 
-////        http.csrf()
+//        http.csrf()
 //            .disable()
 //            .authorizeHttpRequests()
 //                .requestMatchers("/api/v1/auth/**")
 //                .permitAll()
-//                .requestMatchers(GET,"/getAllGroup").hasRole(Role.ADMIN.name())
 //                 //   /api/v1/auth/**
 //                .anyRequest()
 //                .authenticated()
