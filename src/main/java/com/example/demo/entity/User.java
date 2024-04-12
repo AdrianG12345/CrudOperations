@@ -24,8 +24,6 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
-//    @Pattern(regexp = "^[^0-9]*$", message = "FIRST NAME MUST NOT CONTAIN NUMBERS")
     private String firstName;
     private String lastName;
     private String email;

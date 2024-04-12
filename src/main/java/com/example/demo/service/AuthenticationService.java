@@ -27,7 +27,6 @@ public class AuthenticationService {
                 .lastName(request.getLastName())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
-//                .role(Role.ADMIN)
                 .role(request.getRole())
                 .build();
 

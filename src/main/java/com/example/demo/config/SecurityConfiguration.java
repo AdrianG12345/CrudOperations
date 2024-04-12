@@ -27,8 +27,8 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 @EnableMethodSecurity
 public class SecurityConfiguration {
         private static final String[] WHITE_LIST_URL = {"/api/v1/auth/**",
-        "/getAllGroup"
         };
+        private static final String[] ADMIN_ONLY_URL_LIST = {"/getAllStudent", "getAllGroup"};
     private final JwtAuthentificationFilter jwtAuthFilter;
     private final AuthenticationProvider authenticationProvider;
 
@@ -39,31 +39,13 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(req ->
                     req.requestMatchers(WHITE_LIST_URL)
                         .permitAll()
-                        .requestMatchers("/getAllStudent").hasAuthority(ADMIN.name())
+                        .requestMatchers(ADMIN_ONLY_URL_LIST).hasAuthority(ADMIN.name())
                             .anyRequest()
                             .authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
-
-
-
-//        http.csrf()
-//            .disable()
-//            .authorizeHttpRequests()
-//                .requestMatchers("/api/v1/auth/**")
-//                .permitAll()
-//                 //   /api/v1/auth/**
-//                .anyRequest()
-//                .authenticated()
-//                .and()
-//                .sessionManagement()
-//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-//                .and()
-//                .authenticationProvider(authenticationProvider)
-//                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
-
         return http.build();
     }
 }

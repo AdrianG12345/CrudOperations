@@ -28,9 +28,6 @@ public class GroupController {
 		grupRepository.save(grup);
 		return grup;
 	}
-
-	
-	
 	//handler for getting all data from DB
 	@GetMapping("/getAllGroup")
 	public List<Grupuri> getAllGroup(){
@@ -47,8 +44,6 @@ public class GroupController {
 		}
 		return "Deleted with success.";
 	}
-	
-	
 	///handler for update object
 	@PutMapping("/updateGroup")
 	public Grupuri updateGroup(@RequestBody GrupuriDTO grupDTO)

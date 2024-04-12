@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.regex.Pattern;
+
 
 @RestController
 @RequestMapping("/api/v1/auth")
@@ -18,10 +20,11 @@ public class AuthenticationController {
 
     private final AuthenticationService service;
 
-    private final String REGEXNAME = "\"[a-zA-Z]+\"";
+    private final String REGEXNAME = "^[a-zA-Z]+$";
     private static final String[] domainNames = {".com", ".net", ".ro", ".org"};
     @PostMapping("/register")
     public ResponseEntity<AuthenticationResponse> register(@RequestBody RegisterRequest request){
+        Pattern pattern = Pattern.compile(REGEXNAME);
         String email = request.getEmail();
         String firstName = request.getFirstName();
         String lastName = request.getLastName();
@@ -29,7 +32,10 @@ public class AuthenticationController {
         if (!validateEmail(email))
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
 
-        if (! (firstName.matches(REGEXNAME) && lastName.matches(REGEXNAME)) ) {
+        boolean bool = pattern.matcher(firstName).matches() && pattern.matcher(lastName).matches();
+//        if (! (firstName.matches(REGEXNAME) && lastName.matches(REGEXNAME)) ) {
+        if (!bool){
+            System.out.println("name must only be characters");
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
 
@@ -38,8 +44,6 @@ public class AuthenticationController {
 
     @PostMapping("/authenticate")
     public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest request){
-//        String email = request.getEmail();
-//        System.out.println("Email I gave in authentication request is: " + email);
         return ResponseEntity.ok(service.authenticate(request));
     }
 
@@ -47,6 +51,7 @@ public class AuthenticationController {
     private static boolean validateEmail(String email){
         // Check if email contains '@' character
         if (!email.contains("@")) {
+            System.out.println("EMAIL DOES NOT CONTAIN '@'");
 //            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
             return false;
         }
@@ -56,6 +61,7 @@ public class AuthenticationController {
                 ok = 1;
         }
         if (ok == 0){
+            System.out.println("EMAIL DOES NOT END IN DOMAIN NAME!");
             return false;
         }
         return true;
