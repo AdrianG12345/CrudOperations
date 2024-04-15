@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/student")
-public class StudentResource {
+public class StudentResource{
     private final StudentService studentService;
 
     public StudentResource(StudentService studentService)
@@ -19,7 +19,7 @@ public class StudentResource {
         this.studentService = studentService;
     }
 
-    @GetMapping
+    @GetMapping("/getAllStudents")
     public ResponseEntity<List<Student>> getAllStudents()
     {
         List<Student> students = studentService.getAll();

@@ -18,7 +18,7 @@ public class GrupResource {
         this.grupService = grupService;
     }
 
-    @GetMapping
+    @GetMapping("/getAllGroups")
     public ResponseEntity<List<Grupuri>> getALlGroups()
     {
         List<Grupuri> grups = grupService.getAllGroup();
