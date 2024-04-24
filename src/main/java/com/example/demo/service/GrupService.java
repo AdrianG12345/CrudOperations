@@ -43,6 +43,10 @@ public class GrupService {
         Grupuri grup = new Grupuri(grupDTO.getGroup_id(), grupDTO.getGroupNr());
         if (foundById != null)
             grupRepository.save(grup);
+        else
+        {
+            System.out.println("FOUND BY ID IS NULL!");
+        }
 
         return grup;
     }
