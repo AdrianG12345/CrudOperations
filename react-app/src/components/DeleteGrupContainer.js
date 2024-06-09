@@ -60,7 +60,7 @@ const DeleteGrupContainer = () => {
                 type="number"
                 value={inputValue}
                 onChange={handleInputChange}
-                placeholder="Enter an integer"
+                placeholder="Enter an id"
             />
             <button onClick={deleteData}>Delete Group</button> {/* Button to fetch data */}
             <button onClick={goBack}>Go Back</button> {/* Button to fetch data */}

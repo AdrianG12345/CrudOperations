@@ -72,13 +72,13 @@ const UpdateGrupContainer = () => {
                 type="number"
                 value={idValue}
                 onChange={handleInputChange1}
-                placeholder="Enter an integer"
+                placeholder="Enter an id"
             />
             <input
                 type="number"
                 value={nrValue}
                 onChange={handleInputChange2}
-                placeholder="Enter an integer"
+                placeholder="Enter an updated grNr"
             />
             <button onClick={updateData}>Update Data</button> {/* Button to fetch data */}
             <button onClick={goBack}>Go Back</button> {/* Button to fetch data */}
